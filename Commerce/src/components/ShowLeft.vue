@@ -89,10 +89,10 @@
 						<span>资料</span>
 					</template>
 					<el-menu-item-group>
-						<el-menu-item index="8-1">网点维护</el-menu-item>
+						<el-menu-item index="/NetWork">网点维护</el-menu-item>
 						<el-menu-item index="8-2">员工维护</el-menu-item>
-						<el-menu-item index="8-3">客户维护</el-menu-item>
-						<el-menu-item index="8-4">单号规则</el-menu-item>
+						<el-menu-item index="/Client">客户维护</el-menu-item>
+						<el-menu-item index="/Rule">单号规则</el-menu-item>
 						<el-menu-item index="8-5">单号发放</el-menu-item>
 						<el-menu-item index="8-6">提成维护</el-menu-item>
 						<el-menu-item index="8-6">固定维护</el-menu-item>

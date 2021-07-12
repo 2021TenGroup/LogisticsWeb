@@ -11,6 +11,14 @@ import ShowLeft from '../components/ShowLeft.vue'
 import ShowTop from '../components/ShowTop.vue'
 /* 首页内容 */
 import ShowPanel from '../components/ShowPanel.vue'
+/* 客户维护 */
+import Client from '../components/information/Client.vue'
+/* 网点维护 */
+import NetWork from '../components/information/NetWork.vue'
+/* 单号规则 */
+import Rule from '../components/information/Rule.vue'
+/* 员工维护 */
+import Emp from '../components/information/Emp.vue'
 
 const routes = [{
 		path: '/',
@@ -25,7 +33,47 @@ const routes = [{
 			showtop: ShowTop,
 			showpanel: ShowPanel
 		}
-	}
+	},
+	{
+		path: '/Client',
+		name: 'Client',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: Client
+		}
+	},
+	{
+		path: '/NetWork',
+		name: 'NetWork',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: NetWork
+		}
+	},
+	{
+		path: '/Rule',
+		name: 'Rule',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: Rule
+		}
+	},
+	{
+		path: '/Emp',
+		name: 'Emp',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: Emp
+		}
+	},
 ]
 
 const router = createRouter({
