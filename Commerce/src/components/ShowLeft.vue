@@ -50,9 +50,9 @@
 						<span>财务</span>
 					</template>
 					<el-menu-item-group>
-						<el-menu-item index="/ClassType">预付款设置</el-menu-item>
-						<el-menu-item index="/ClassType">预付款充值</el-menu-item>
-						<el-menu-item index="/ClassType">预付款查询</el-menu-item>
+						<el-menu-item index="/AdvancePaymentSetup">预付款设置</el-menu-item>
+						<el-menu-item index="/Recharge">预付款充值</el-menu-item>
+						<el-menu-item index="/RechargeRecord">充值记录</el-menu-item>
 						<el-menu-item index="/ClassType">财务报表明细</el-menu-item>
 						<el-menu-item index="/ClassType">财务报表汇总</el-menu-item>
 						<el-menu-item index="/ClassType">现金账单</el-menu-item>

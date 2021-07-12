@@ -3,7 +3,7 @@ import {
 } from 'vuex'
 const store = createStore({
 	state: {
-		loginname:"蔡锦康",
+		loginname:"張三",
 		isCollapse: false,
 		left: 230,
 		lefticon: "el-icon-s-fold",

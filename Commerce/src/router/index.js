@@ -21,6 +21,12 @@ import Rule from '../components/information/Rule.vue'
 import Emp from '../components/information/Emp.vue'
 /* 单号发放 */
 import Grant from '../components/information/Grant.vue'
+/* 预付款设置 */
+import AdvancePaymentSetup from '../components/finance/AdvancePaymentSetup.vue'
+/* 充值 */
+import Recharge from '../components/finance/Recharge.vue'
+/* 充值记录 */
+import RechargeRecord from '../components/finance/RechargeRecord.vue'
 
 const routes = [{
 		path: '/',
@@ -76,6 +82,36 @@ const routes = [{
 			showpanel: Grant
 		}
 	},
+	{
+		path: '/AdvancePaymentSetup',
+		name: 'AdvancePaymentSetup',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: AdvancePaymentSetup
+		}
+	},
+	{
+		path: '/RechargeRecord',
+		name: 'RechargeRecord',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: RechargeRecord
+		}
+	},
+	{
+		path: '/Recharge',
+		name: 'Recharge',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: Recharge
+		}
+	}
 ]
 
 const router = createRouter({
