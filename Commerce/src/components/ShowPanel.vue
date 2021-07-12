@@ -26,31 +26,22 @@
 						:header-cell-style="{background:'rgb(238, 241, 246) none repeat scroll 0% 0%',color:'#606266'}">
 						<el-table-column type="selection" min-width="50">
 						</el-table-column>
-						<el-table-column type="expand" max-width="15" label="详细" :show-overflow-tooltip="true">
-							<template #default="props">
-								<el-form label-position="left" inline class="demo-table-expand">
-									<div style="display: inline-block;" class="el-table-xiang-show-one-s">
-										<el-form-item label="课程费用:">
-											<span>{{ props.row.courseVo.courseMoney }}元</span>
-										</el-form-item>
-										<el-form-item label="课时量:">
-											<span>{{ props.row.courseVo.classhours }}</span>
-										</el-form-item>
-									</div>
-								</el-form>
-							</template>
+						<el-table-column min-width="20" type="index" align="center" :index="indexMethod" label="编号">
 						</el-table-column>
-						<el-table-column prop="coursedetailsName" min-width="50" label="课程详细名称" align="center">
+						<el-table-column prop="customerNumber" min-width="50" label="客户编号" align="center">
 						</el-table-column>
-						<el-table-column prop="courseVo.courseName" min-width="50" label="课程名称" align="center">
+						<el-table-column prop="customerName" min-width="50" label="姓名" align="center">
 						</el-table-column>
-						<el-table-column prop="coursesequence" min-width="50" label="课程序列号" align="center">
+						<el-table-column prop="customerPhone" min-width="50" label="手机" align="center">
+						</el-table-column>
+						<el-table-column prop="customerUser" min-width="50" label="邮箱" align="center">
+						</el-table-column>
+						<el-table-column prop="outletsVo.outletsName" min-width="50" label="所属网点" align="center">
 						</el-table-column>
 						<el-table-column label="操作" align="center">
 							<template #default="scope">
-								<el-button @click="showEdit(scope.row)" type="text" size="small">编辑</el-button>
-								<div class="ivu-divider"></div>
-								<el-button @click="delSelectAllCourseDetail(scope.row)" type="text" size="small">删除
+								<el-button @click="" class="el-button--primary" size="small">编辑</el-button>
+								<el-button @click="" class="el-button--primary2" size="small">删除
 								</el-button>
 							</template>
 						</el-table-column>
@@ -67,6 +58,54 @@
 			</div>
 		</el-col>
 	</el-row>
+	<!-- 弹窗 -->
+	<el-dialog title="增加客户信息" v-model="dialogVisible" width="30%" :before-close="handleClose">
+		<el-form :model="Customer" :rules="rules" ref="Customer" label-width="100px">
+			<el-form-item label="客户编号:">
+				<el-input v-model="Customer.customerNumber" placeholder="请输入客户编号"></el-input>
+			</el-form-item>
+			<el-form-item label="客户姓名:">
+				<el-input v-model="Customer.customerName" placeholder="请输入客户姓名"></el-input>
+			</el-form-item>
+			<!-- <el-form-item label="所属网点:" style="padding-right: 85px;">
+				<el-select v-model="Course.classtypeId" placeholder="请选择">
+					<el-option v-for="item in classtypeData" :key="item.classtypeId" :label="item.classtypeName"
+						:value="item.classtypeId">
+					</el-option>
+				</el-select>
+			</el-form-item> -->
+			<!-- <el-form-item label="结算方式:" style="padding-right: 85px;">
+				<el-select v-model="Course.classtypeId" placeholder="请选择">
+					<el-option v-for="item in classtypeData" :key="item.classtypeId" :label="item.classtypeName"
+						:value="item.classtypeId">
+					</el-option>
+				</el-select>
+			</el-form-item> -->
+			<el-form-item label="邮箱:">
+				<el-input v-model="Customer.customerUser" placeholder="请输入邮箱"></el-input>
+			</el-form-item>
+			<el-form-item label="地址:">
+				<el-input v-model="Customer.customerAddress" placeholder="请输入地址"></el-input>
+			</el-form-item>
+			<!-- <el-form-item label="课时费用:">
+				<el-input v-model="Course.courseMoney" placeholder="请输入课时费用"></el-input>
+			</el-form-item>
+			<el-form-item label="课程提成:">
+				<el-input v-model="Course.commission" placeholder="请输入课程提成金额"></el-input>
+			</el-form-item> -->
+			<!-- <el-form-item label="开报办理人:">
+				<el-input v-model="Course.beginname" placeholder="请输入开报办理人"></el-input>
+			</el-form-item> -->
+			<!-- <el-form-item label="开报时间:"> -->
+				<!-- <el-date-picker type="date" placeholder="选择日期" v-model="Course.begintime" style="width: 100%;">
+				</el-date-picker> -->
+			<!-- 	<el-input type="date" v-model="Course.begintime"></el-input>
+			</el-form-item> -->
+			<el-form-item style="margin-right: 80px;" class="el-form-butt-show-one-s">
+				<el-button type="primary" @click="">立即创建</el-button>
+			</el-form-item>
+		</el-form>
+	</el-dialog>
 </template>
 
 <script>
@@ -77,9 +116,9 @@
 		data() {
 			return {
 				rules: {
-					coursedetailsName: [{
+					customerName: [{
 							required: true,
-							message: '请输入课程详细名称',
+							message: '请输入客户姓名',
 							trigger: 'blur'
 						},
 						{
@@ -90,6 +129,7 @@
 						}
 					]
 				},
+				dialogVisible:true,
 				multipleSelection: [],
 				pageInfo: {
 					currentPage: 1,
@@ -97,8 +137,28 @@
 					total: 0
 				},
 				CustomerData: [],
-				Customer: [],
-				input: ''
+				OutletsData: [],
+				input: '',
+				Customer:{
+					customerId:"",
+					outletsId:"",
+					customerNumber:"",
+					customerName:"",
+					customerSettlement:"",
+					customerUser:"",
+					customerPhone:"",
+					customerProvince:"",
+					customerCity:"",
+					customerRegion:"",
+					customerAddress:"",
+					addname:"",
+					addtime:"",
+					updatename:"",
+					updatetime:"",
+					deletename:"",
+					deletetime:"",
+					timeliness:""
+				},
 			}
 		},
 		methods: {
@@ -108,6 +168,9 @@
 						done();
 					})
 					.catch(_ => {});
+			},
+			indexMethod(index) {
+				return index + 1 + (this.pageInfo.currentPage - 1) * this.pageInfo.pagesize;
 			},
 			handleSelectionChange(multipleSelection) {
 				this.multipleSelection = multipleSelection;
@@ -143,11 +206,11 @@
 						console.log(error)
 					})
 			},
-			addCourseDetail() {
+			addCustomer() {
 				this.dialogVisible = true;
-				Object.keys(this.CourseDetail).forEach((key) => (this.CourseDetail[key] = ""))
+				Object.keys(this.Customer).forEach((key) => (this.Customer[key] = ""))
 			},
-			FindCourseDetailData() {
+			FindCustomerData() {
 				var _this = this
 				console.log(this.pageInfo.currentPage, this.pageInfo.pagesize)
 				this.axios.get("http://localhost:8089/Logistics/selectAllCustomer", {
@@ -175,12 +238,12 @@
 					console.log(error)
 				})
 			var _this = this
-			this.axios.get("http://localhost:8089/Logistics/selectAllCustomerList", {
-					params: this.Customer
+			this.axios.get("http://localhost:8089/Logistics/selectAllOutletsList", {
+					params: this.OutletsData
 				})
 				.then(function(response) {
 					console.log(response)
-					_this.Customer = response.data.list
+					_this.OutletsData = response.data.list
 				}).catch(function(error) {
 					console.log(error)
 				})
@@ -330,5 +393,37 @@
 
 	.el-table .cell {
 		padding-left: 9px;
+	}
+
+	.el-pager li.active {
+		color: #fff;
+		cursor: default;
+		background: #337ab7;
+	}
+
+	.el-pagination__total {
+		margin-right: 10px;
+		font-weight: 400;
+		color: #606266;
+		font-weight: 600;
+		color: #337ab7;
+	}
+
+	.el-pagination button:disabled {
+		background-color: #eff9fc;
+		cursor: not-allowed;
+		margin: 0 8px;
+	}
+
+	.el-button--primary {
+		color: #fff;
+		background-color: #337ab7;
+		border-color: #337ab7;
+	}
+
+	.el-button--primary2 {
+		color: #fff;
+		background-color: #d9534f;
+		border-color: #d9534f;
 	}
 </style>
