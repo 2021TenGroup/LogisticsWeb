@@ -76,6 +76,16 @@ const routes = [{
 			showpanel: Grant
 		}
 	},
+	{
+		path: '/Emp',
+		name: 'Emp',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: Emp
+		}
+	},
 ]
 
 const router = createRouter({

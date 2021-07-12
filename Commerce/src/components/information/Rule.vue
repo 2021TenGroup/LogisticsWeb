@@ -27,8 +27,8 @@
 						</el-table-column>
 						<el-table-column :show-overflow-tooltip='true' min-width="70" label="当前最大单号" align="center">
 							<template #default="scope">
-								<span v-if="scope.row.ruleMax=''">暂无</span>
-								<span v-if="scope.row.ruleMax!=null" >{{scope.row.ruleMax}}</span>
+								<span v-if="scope.row.ruleMax==''">暂无</span>
+								<span v-if="scope.row.ruleMax!==null" >{{scope.row.ruleMax}}</span>
 							</template>
 						</el-table-column>
 						<el-table-column :show-overflow-tooltip='true' min-width="30" prop="ruleRemarks" label="备注" align="center">

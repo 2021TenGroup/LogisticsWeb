@@ -3,8 +3,10 @@
 	<el-row>
 		<el-col :span="23" class="el-center-top-labels" style="border-bottom: 1px solid #e8eaec;">
 			<div class="el-select-table-two-s">
-				<el-button @click="addCustomer()" style="background:#337ab7;border-color: #337ab7;color: #fff;"><i
-						class="el-icon-circle-plus-outline"></i>添加</el-button>
+				<el-button @click="" style="background:#337ab7;border-color: #337ab7;color: #fff;"><i
+						class="el-icon-search"></i>搜索</el-button>
+				<el-button @click="addCustomer()" style="background:#51c7ae;border-color: #51c7ae;color: #fff;"><i
+						class="el-icon-paperclip"></i>发放</el-button>
 			</div>
 		</el-col>
 	</el-row>
@@ -17,43 +19,37 @@
 						:header-cell-style="{background:'rgb(238, 241, 246) none repeat scroll 0% 0%',color:'#606266'}">
 						<el-table-column min-width="20" type="index" align="center" :index="indexMethod" label="序号">
 						</el-table-column>
-						<el-table-column prop="ruleName" :show-overflow-tooltip='true' min-width="40" label="使用网点" align="center">
+						<el-table-column prop="outletsVo.outletsName" :show-overflow-tooltip='true' min-width="40"
+							label="使用网点" align="center">
 						</el-table-column>
-						<el-table-column :show-overflow-tooltip='true' prop="ruleStart" min-width="55" label="开始单号" align="center">
+						<el-table-column :show-overflow-tooltip='true' prop="numberlssueOrder" min-width="55"
+							label="开始单号" align="center">
 						</el-table-column>
-						<el-table-column :show-overflow-tooltip='true' prop="ruleEnd" min-width="55" label="单号总数" align="center">
+						<el-table-column :show-overflow-tooltip='true' prop="numberlssueNumber" min-width="55"
+							label="单号总数" align="center">
 						</el-table-column>
-						<el-table-column prop="ruleLenght" min-width="45" label="使用最大单号" align="center">
+						<el-table-column :show-overflow-tooltip='true' prop="numberlssueEnd" min-width="70" label="结束单号"
+							align="center">
 						</el-table-column>
-						<el-table-column :show-overflow-tooltip='true' min-width="70" label="结束单号" align="center">
+						<el-table-column :show-overflow-tooltip='true' min-width="45" prop="numberlssueUp" label="单号状态"
+							align="center">
 							<template #default="scope">
-								<span v-if="scope.row.ruleMax=''">暂无</span>
-								<span v-if="scope.row.ruleMax!=null" >{{scope.row.ruleMax}}</span>
+								<span v-if="scope.row.numberlssueUp==0">可用</span>
+								<span v-if="scope.row.numberlssueUp==1">不可用</span>
+								<span v-if="scope.row.numberlssueUp==2">已用完</span>
 							</template>
 						</el-table-column>
-						<el-table-column :show-overflow-tooltip='true' min-width="45" prop="ruleRemarks" label="单号状态" align="center">
-						</el-table-column>
-						<el-table-column min-width="60" label="备注" align="center">
-							<template #default="scope">
-								<span v-if="scope.row.ruleType==0">单号规则</span>
-								<span v-if="scope.row.ruleType0==1">袋号规则</span>
-							</template>
+						<el-table-column min-width="60" label="备注" prop="numberlssueRemarks" align="center">
 						</el-table-column>
 						<el-table-column prop="addtime" min-width="55" label="添加时间" align="center">
 						</el-table-column>
 						<el-table-column min-width="110" label="操作" align="center">
 							<template #default="scope">
-								<el-button v-if="scope.row.ruleUsage==1" disabled @click="showEdit(scope.row)" class="el-button--primary" size="small">
-									<i class="el-icon-edit"></i>
+								<el-button @click="showEdit(scope.row)" class="el-button--primary" size="small">
+									编辑
 								</el-button>
-								<el-button v-if="scope.row.ruleUsage==0" @click="showEdit(scope.row)" class="el-button--primary" size="small">
-									<i class="el-icon-edit"></i>
-								</el-button>
-								<el-button v-if="scope.row.ruleUsage==1" @click="delCustomer(scope.row)" disabled class="el-button--primary2" size="small">
-									<i class="el-icon-delete"></i>
-								</el-button>
-								<el-button v-if="scope.row.ruleUsage==0" @click="delCustomer(scope.row)" class="el-button--primary2" size="small">
-									<i class="el-icon-delete"></i>
+								<el-button @click="delCustomer(scope.row)" class="el-button--primary2" size="small">
+									删除
 								</el-button>
 							</template>
 						</el-table-column>
@@ -71,30 +67,24 @@
 		</el-col>
 	</el-row>
 	<!-- 弹窗 -->
-	<el-dialog title="增加订单规则" v-model="dialogVisible" width="40%" :before-close="handleClose">
-		<el-form :model="Rule" :rules="rules" ref="Rule" label-width="100px">
-			<el-form-item label="类型:" style="padding-right: 85px;">
-				<el-select v-model="Rule.ruleType" placeholder="请选择">
-					<el-option v-for="item in uptheshow" :key="item.uid" :label="item.uname" :value="item.uid">
+	<el-dialog title="单号发放" v-model="dialogVisible" width="40%" :before-close="handleClose">
+		<el-form :model="Numberlssue" :rules="rules" ref="Numberlssue" label-width="100px">
+			<el-form-item label="发放网点:" style="padding-right: 85px;">
+				<el-select v-model="Numberlssue.outletsId" placeholder="请选择">
+					<el-option v-for="item in OutletsData" :key="item.outletsId" :label="item.outletsName" :value="item.outletsId">
 					</el-option>
 				</el-select>
 			</el-form-item>
-			<el-form-item label="名称:">
-				<el-input v-model="Rule.ruleName" placeholder="请输入名称"></el-input>
+			<el-form-item label="开始单号:">
+				<el-input v-model="Numberlssue.numberlssueOrder" placeholder="请输入备注"></el-input>
 			</el-form-item>
-			<el-form-item label="开始字符:">
-				<el-input v-model="Rule.ruleStart" placeholder="请输入开始字符"></el-input>
-			</el-form-item>
-			<el-form-item label="结束字符:">
-				<el-input v-model="Rule.ruleEnd" placeholder="请输入结束字符"></el-input>
-			</el-form-item>
-			<el-form-item label="长度:">
-				<el-input-number @change="handleChange" :min="1" :max="10" v-model="Rule.ruleLenght"
+			<el-form-item label="发放数量:">
+				<el-input-number @change="handleChange" :min="1" :max="100" v-model="Numberlssue.numberlssueNumber"
 					placeholder="请输入长度">
 				</el-input-number>
 			</el-form-item>
 			<el-form-item label="备注:">
-				<el-input v-model="Rule.ruleRemarks" placeholder="请输入备注"></el-input>
+				<el-input v-model="Numberlssue.numberlssueRemarks" placeholder="请输入备注"></el-input>
 			</el-form-item>
 			<el-form-item style="margin-right: 80px;" class="el-form-butt-show-one-s">
 				<el-button type="primary" @click="addCustomer2()"><i class="el-icon-s-promotion"></i>提交</el-button>
@@ -102,33 +92,27 @@
 		</el-form>
 	</el-dialog>
 	<!-- 弹窗 -->
-	<el-dialog title="修改订单规则" v-model="dialogVisible2" width="40%" :before-close="handleClose">
-		<el-form :model="Rule" :rules="rules" ref="Rule" label-width="100px">
-			<el-form-item label="类型:" style="padding-right: 85px;">
-				<el-select disabled v-model="Rule.ruleType" placeholder="请选择">
-					<el-option v-for="item in uptheshow" :key="item.uid" :label="item.uname" :value="item.uid">
+	<el-dialog title="单号发放" v-model="dialogVisible2" width="40%" :before-close="handleClose">
+		<el-form :model="Numberlssue" :rules="rules" ref="Numberlssue" label-width="100px">
+			<el-form-item label="发放网点:" style="padding-right: 85px;">
+				<el-select v-model="Numberlssue.outletsId" placeholder="请选择">
+					<el-option v-for="item in OutletsData" :key="item.outletsId" :label="item.outletsName" :value="item.outletsId">
 					</el-option>
 				</el-select>
 			</el-form-item>
-			<el-form-item label="名称:">
-				<el-input v-model="Rule.ruleName" placeholder="请输入名称"></el-input>
+			<el-form-item label="开始单号:">
+				<el-input v-model="Numberlssue.numberlssueOrder" placeholder="请输入备注"></el-input>
 			</el-form-item>
-			<el-form-item label="开始字符:">
-				<el-input v-model="Rule.ruleStart" placeholder="请输入开始字符"></el-input>
-			</el-form-item>
-			<el-form-item label="结束字符:">
-				<el-input v-model="Rule.ruleEnd" placeholder="请输入结束字符"></el-input>
-			</el-form-item>
-			<el-form-item label="长度:">
-				<el-input-number disabled @change="handleChange" :min="1" :max="10" v-model="Rule.ruleLenght"
+			<el-form-item label="发放数量:">
+				<el-input-number @change="handleChange" :min="1" :max="100" v-model="Numberlssue.numberlssueNumber"
 					placeholder="请输入长度">
 				</el-input-number>
 			</el-form-item>
 			<el-form-item label="备注:">
-				<el-input v-model="Rule.ruleRemarks" placeholder="请输入备注"></el-input>
+				<el-input v-model="Numberlssue.numberlssueRemarks" placeholder="请输入备注"></el-input>
 			</el-form-item>
 			<el-form-item style="margin-right: 80px;" class="el-form-butt-show-one-s">
-				<el-button type="primary" @click="updateCustomer()">立即修改</el-button>
+				<el-button type="primary" @click="updateCustomer()">提交</el-button>
 			</el-form-item>
 		</el-form>
 	</el-dialog>
@@ -155,16 +139,14 @@
 						}
 					]
 				},
-				Rule: {
-					ruleId: "",
-					ruleName: "",
-					ruleStart: "",
-					ruleEnd: "",
-					ruleLenght: "",
-					ruleMax: "",
-					ruleRemarks: "",
-					ruleType: "",
-					ruleUsage: "",
+				Numberlssue: {
+					numberlssueId: "",
+					outletsId: "",
+					numberlssueOrder: "",
+					numberlssueNumber: "",
+					numberlssueEnd: "",
+					numberlssueUp: "",
+					numberlssueRemarks: "",
 					addname: "",
 					addtime: "",
 					updatename: "",
@@ -209,8 +191,8 @@
 				return index + 1 + (this.pageInfo.currentPage - 1) * this.pageInfo.pagesize;
 			},
 			delCustomer(row) {
-				this.Rule.ruleId = row.ruleId
-				this.Rule.deletename = this.$store.state.loginname
+				this.Numberlssue.numberlssueId = row.numberlssueId
+				this.Numberlssue.deletename = this.$store.state.loginname
 				const _this = this
 				var flag = true
 				this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
@@ -218,7 +200,7 @@
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-					this.axios.put("http://localhost:8089/Logistics/deleteByNumberRule", this.Rule)
+					this.axios.put("http://localhost:8089/Logistics/deleteByNumberLssue", this.Numberlssue)
 						.then(function(response) {
 							_this.FindCustomerData();
 						}).catch(function(error) {
@@ -232,47 +214,34 @@
 				});
 			},
 			addCustomer2() {
-				var a = Number(this.Rule.ruleStart.length)
-				var b = Number(this.Rule.ruleEnd.length)
-				var c = a+b
-				if(c>Number(this.Rule.ruleLenght)){
-					console.log("添加失败")
-					this.$message({
-						type: 'error',
-						message: '单号设置不规范,总长度过短'
-					});
-				} else{
-					console.log("添加成功")
-					this.Rule.addname = this.$store.state.loginname
-					this.Rule.timeliness = 0
-					this.Rule.ruleUsage = 0
-					const _this = this
-					this.axios.post("http://localhost:8089/Logistics/addNumberRule", this.Rule)
-						.then(function(response) {
-							_this.FindCustomerData();
-							_this.dialogVisible = false
-						}).catch(function(error) {
-							console.log(error)
-						})
-				}
+				console.log("添加成功")
+				this.Numberlssue.addname = this.$store.state.loginname
+				this.Numberlssue.timeliness = 0
+				this.Numberlssue.numberlssueUp = 0
+				const _this = this
+				this.axios.post("http://localhost:8089/Logistics/addNumberLssue", this.Numberlssue)
+					.then(function(response) {
+						_this.FindCustomerData();
+						_this.dialogVisible = false
+					}).catch(function(error) {
+						console.log(error)
+					})
 			},
 			showEdit(row) {
-				this.Rule.ruleId = row.ruleId
-				this.Rule.ruleName = row.ruleName
-				this.Rule.ruleStart = row.ruleStart
-				this.Rule.ruleEnd = row.ruleEnd
-				this.Rule.ruleLenght = row.ruleLenght
-				this.Rule.ruleMax = row.ruleMax
-				this.Rule.ruleRemarks = row.ruleRemarks
-				this.Rule.ruleType = row.ruleType
-				this.Rule.ruleUsage = row.ruleUsage
-				this.Rule.updatename = this.$store.state.loginname
-				this.Rule.addname = null
+				this.Numberlssue.outletsId=row.outletsId
+				this.Numberlssue.numberlssueId=row.numberlssueId
+				this.Numberlssue.numberlssueOrder=row.numberlssueOrder
+				this.Numberlssue.numberlssueNumber=row.numberlssueNumber
+				this.Numberlssue.numberlssueEnd=row.numberlssueEnd
+				this.Numberlssue.numberlssueUp=row.numberlssueUp
+				this.Numberlssue.numberlssueRemarks=row.numberlssueRemarks
+				this.Numberlssue.updatename = this.$store.state.loginname
+				this.Numberlssue.addname = null
 				this.dialogVisible2 = true
 			},
 			updateCustomer() {
 				const _this = this
-				this.axios.put("http://localhost:8089/Logistics/updateNumberRule", this.Rule)
+				this.axios.put("http://localhost:8089/Logistics/updateNumberLssue", this.Numberlssue)
 					.then(function(response) {
 						_this.dialogVisible2 = false
 						_this.FindCustomerData();
@@ -316,7 +285,7 @@
 			},
 			addCustomer() {
 				this.dialogVisible = true;
-				Object.keys(this.Rule).forEach((key) => (this.Rule[key] = ""))
+				Object.keys(this.Numberlssue).forEach((key) => (this.Numberlssue[key] = ""))
 			},
 			FindCustomerData() {
 				var _this = this
@@ -342,6 +311,17 @@
 					console.log(response)
 					_this.NumberLssueData = response.data.list
 					_this.pageInfo.total = response.data.total
+				}).catch(function(error) {
+					console.log(error)
+				})
+			var _this = this
+			this.axios.get("http://localhost:8089/Logistics/selectAllOutletsList", {
+					params: this.OutletsData
+				})
+				.then(function(response) {
+					console.log(response)
+					_this.OutletsData = response.data.data
+					console.log(_this.OutletsData)
 				}).catch(function(error) {
 					console.log(error)
 				})
