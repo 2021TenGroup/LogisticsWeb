@@ -11,6 +11,16 @@ import ShowLeft from '../components/ShowLeft.vue'
 import ShowTop from '../components/ShowTop.vue'
 /* 首页内容 */
 import ShowPanel from '../components/ShowPanel.vue'
+/* 代收货款查询 */
+import PaymentGoodsSelect from '../components/finance/PaymentGoodsSelect.vue'
+/* 代收货款管理 */
+import PaymentGoodsManage from '../components/finance/PaymentGoodsManage.vue'
+/* 运费账单 */
+import CashBill from '../components/finance/CashBill.vue'
+/* 维护账单 */
+import MaintenanceSheet from '../components/finance/MaintenanceSheet.vue'
+/* 维护账单 */
+import MaintenanceSheetTotal from '../components/finance/MaintenanceSheetTotal.vue'
 
 const routes = [{
 		path: '/',
@@ -24,6 +34,56 @@ const routes = [{
 			showleft: ShowLeft,
 			showtop: ShowTop,
 			showpanel: ShowPanel
+		}
+	},
+	{
+		path: '/PaymentGoodsSelect',
+		name: 'PaymentGoodsSelect',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: PaymentGoodsSelect
+		}
+	},
+	{
+		path: '/PaymentGoodsManage',
+		name: 'PaymentGoodsManage',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: PaymentGoodsManage
+		}
+	},
+	{
+		path: '/CashBill',
+		name: 'CashBill',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: CashBill
+		}
+	},
+	{
+		path: '/MaintenanceSheet',
+		name: 'MaintenanceSheet',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: MaintenanceSheet
+		}
+	},
+	{
+		path: '/MaintenanceSheetTotal',
+		name: 'MaintenanceSheetTotal',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: MaintenanceSheetTotal
 		}
 	}
 ]

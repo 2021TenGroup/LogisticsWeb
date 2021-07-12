@@ -53,12 +53,11 @@
 						<el-menu-item index="/ClassType">预付款设置</el-menu-item>
 						<el-menu-item index="/ClassType">预付款充值</el-menu-item>
 						<el-menu-item index="/ClassType">预付款查询</el-menu-item>
-						<el-menu-item index="/ClassType">财务报表明细</el-menu-item>
-						<el-menu-item index="/ClassType">财务报表汇总</el-menu-item>
-						<el-menu-item index="/ClassType">现金账单</el-menu-item>
-						<el-menu-item index="/ClassType">月结账单</el-menu-item>
-						<el-menu-item index="/ClassType">代收货款查询</el-menu-item>
-						<el-menu-item index="/ClassType">代收货款管理</el-menu-item>
+						<el-menu-item index="/MaintenanceSheet">维护账单</el-menu-item>
+						<el-menu-item index="/MaintenanceSheetTotal">维护账单汇总</el-menu-item>
+						<el-menu-item index="/CashBill">运费账单</el-menu-item>
+						<el-menu-item index="/PaymentGoodsSelect">代收货款查询</el-menu-item>
+						<el-menu-item index="/PaymentGoodsManage">代收货款管理</el-menu-item>
 					</el-menu-item-group>
 				</el-submenu>
 				<el-submenu index="5">
