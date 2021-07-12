@@ -5,11 +5,11 @@ const store = createStore({
 	state: {
 		loginname:"蔡锦康",
 		isCollapse: false,
-		left: 200,
+		left: 230,
 		lefticon: "el-icon-s-fold",
 		leftimg: "",
 		leftlable: "block",
-		leftcolor: "#545c64",
+		leftcolor: "rgb(42, 63, 84)",
 		/* 左边颜色 */
 		fontcolor: "#FFFFFF",
 		/* 左边招牌字体颜色 */
@@ -21,7 +21,7 @@ const store = createStore({
 		/* 需要调试[自动更改] */
 		leftfontcolor: "#FFFFFF",
 		/* 左边导航栏字体颜色 */
-		topcolor: "#fff",
+		topcolor: "#ededed",
 		/* 头部颜色 */
 		topfontcolor: "#999",
 		/* 头部字体颜色 */

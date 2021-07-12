@@ -6,7 +6,7 @@
 			<router-view name="showleft"></router-view>
 		</el-aside>
 		<el-container>
-			<el-header style="padding: inherit;height: 64px;" v-bind:style="{background:this.$store.state.topcolor}">
+			<el-header style="padding: inherit;height: 79px;" v-bind:style="{background:this.$store.state.topcolor}">
 				<router-view name="showtop"></router-view>
 			</el-header>
 			<el-main style="padding: 0px;">

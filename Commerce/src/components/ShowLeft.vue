@@ -5,7 +5,7 @@
 		<div class="el-label-s" :style="{display:this.$store.state.leftlable,paddingLeft:20+'px'}">火云物流</div>
 		
 	</div>
-	<el-row class="tac" style="height: 720px;">
+	<el-row class="tac">
 		<el-col :span="24">
 			<el-menu default-active="0" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :background-color="this.$store.state.leftcolor"
 			 :text-color="this.$store.state.leftfontcolor" :active-text-color="this.$store.state.leftactioncolor" :unique-opened="true"

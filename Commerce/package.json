@@ -2,7 +2,7 @@
   "name": "commerce",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --port 8081",
+    "dev": "vite --port 8088",
     "build": "vite build"
   },
   "dependencies": {
