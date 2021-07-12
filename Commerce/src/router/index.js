@@ -19,6 +19,8 @@ import NetWork from '../components/information/NetWork.vue'
 import Rule from '../components/information/Rule.vue'
 /* 员工维护 */
 import Emp from '../components/information/Emp.vue'
+/* 单号发放 */
+import Grant from '../components/information/Grant.vue'
 
 const routes = [{
 		path: '/',
@@ -65,13 +67,13 @@ const routes = [{
 		}
 	},
 	{
-		path: '/Emp',
-		name: 'Emp',
+		path: '/Grant',
+		name: 'Grant',
 		components: {
 			homepage: HomePage,
 			showleft: ShowLeft,
 			showtop: ShowTop,
-			showpanel: Emp
+			showpanel: Grant
 		}
 	},
 ]

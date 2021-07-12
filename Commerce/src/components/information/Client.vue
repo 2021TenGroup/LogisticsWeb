@@ -30,7 +30,7 @@
 						:header-cell-style="{background:'rgb(238, 241, 246) none repeat scroll 0% 0%',color:'#606266'}">
 						<el-table-column type="selection" min-width="50">
 						</el-table-column>
-						<el-table-column min-width="20" type="index" align="center" :index="indexMethod" label="编号">
+						<el-table-column min-width="20" type="index" align="center" :index="indexMethod" label="序号">
 						</el-table-column>
 						<el-table-column prop="customerNumber" min-width="50" label="客户编号" align="center">
 						</el-table-column>
@@ -113,7 +113,7 @@
 				<el-input v-model="Customer.customerAddress" placeholder="请输入地址"></el-input>
 			</el-form-item>
 			<el-form-item style="margin-right: 80px;" class="el-form-butt-show-one-s">
-				<el-button type="primary" @click="addCustomer2()">立即创建</el-button>
+				<el-button type="primary" @click="addCustomer2()"><i class="el-icon-s-promotion"></i>提交</el-button>
 			</el-form-item>
 		</el-form>
 	</el-dialog>
