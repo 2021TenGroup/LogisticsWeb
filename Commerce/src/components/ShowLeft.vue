@@ -78,10 +78,8 @@
 						<span>仓库</span>
 					</template>
 					<el-menu-item-group>
-						<el-menu-item index="/Payment">入库登记</el-menu-item>
-						<el-menu-item index="/OutStanding">入库查询</el-menu-item>
-						<el-menu-item index="/Refund">出库登记</el-menu-item>
-						<el-menu-item index="/StorageExpenditure">出库查询</el-menu-item>
+						<el-menu-item index="/EnterWare">入库登记</el-menu-item>
+						<el-menu-item index="/OutWare">出库登记</el-menu-item>
 					</el-menu-item-group>
 				</el-submenu>
 				<el-submenu index="7">

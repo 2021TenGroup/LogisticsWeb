@@ -39,6 +39,11 @@ import RechargeRecord from '../components/finance/RechargeRecord.vue'
 /* 测试管理 */
 import DemoManage from '../components/finance/demoManage.vue'
 
+/* 入库登记*/
+import EnterWare from '../components/warehouse/EnterWare.vue'
+// 出库登记
+import OutWare from '../components/warehouse/OutWare.vue'
+
 const routes = [{
 		path: '/',
 		redirect: '/HomePage'
@@ -182,7 +187,28 @@ const routes = [{
 			showtop: ShowTop,
 			showpanel: DemoManage
 		}
-	}
+	},
+	{
+		path: '/EnterWare',
+		name: 'EnterWare',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: EnterWare
+		}
+	},
+	{
+		path: '/OutWare',
+		name: 'OutWare',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: OutWare
+		}
+	},
+	
 ]
 
 const router = createRouter({

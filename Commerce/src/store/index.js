@@ -3,7 +3,7 @@ import {
 } from 'vuex'
 const store = createStore({
 	state: {
-		loginname:"蔡锦康",
+		loginname: "蔡锦康",
 		isCollapse: false,
 		left: 230,
 		lefticon: "el-icon-s-fold",
@@ -30,7 +30,11 @@ const store = createStore({
 		topdaohangcolor: "#606266",
 		/* 头部当前界面字体颜色 */
 		centerlabel: "none",
-		centertoptitle: "block" /* 中间头部显示 */
+		/* 中间头部显示 */
+		centertoptitle: "block",
+		//当前网点
+		outlets: '株洲市网点',
+		outletsId: 3
 	},
 	getters: {
 		isCollapse: (state) => {
