@@ -3,8 +3,6 @@
 	<el-row>
 		<el-col :span="23" class="el-center-top-labels" style="border-bottom: 1px solid #e8eaec;">
 			<div class="el-select-table-two-s">
-				<el-button @click="" style="background:#337ab7;border-color: #337ab7;color: #fff;"><i
-						class="el-icon-search"></i>搜索</el-button>
 				<el-button @click="addCustomer()" style="background:#51c7ae;border-color: #51c7ae;color: #fff;"><i
 						class="el-icon-paperclip"></i>发放</el-button>
 			</div>
