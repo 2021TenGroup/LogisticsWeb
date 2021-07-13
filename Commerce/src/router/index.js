@@ -44,6 +44,12 @@ import EnterWare from '../components/warehouse/EnterWare.vue'
 // 出库登记
 import OutWare from '../components/warehouse/OutWare.vue'
 
+import AddOrder from '../components/ordersallocation/AddOrder.vue'
+import OrderMaster from '../components/ordersallocation/OrderMaster.vue'
+
+import CommissionM from '../components/information/CommissionM.vue'
+import TypeM from '../components/information/TypeM.vue'
+
 const routes = [{
 		path: '/',
 		redirect: '/HomePage'
@@ -208,7 +214,46 @@ const routes = [{
 			showpanel: OutWare
 		}
 	},
-	
+	{
+		path: '/AddOrder',
+		name: 'AddOrder',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: AddOrder
+		}
+	},
+	{
+		path: '/OrderMaster',
+		name: 'OrderMaster',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: OrderMaster
+		}
+	},
+	{
+		path: '/CommissionM',
+		name: 'CommissionM',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: CommissionM
+		}
+	},
+	{
+		path: '/TypeM',
+		name: 'TypeM',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: TypeM
+		}
+	}
 ]
 
 const router = createRouter({

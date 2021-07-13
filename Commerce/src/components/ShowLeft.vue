@@ -68,8 +68,8 @@
 						<span>订单</span>
 					</template>
 					<el-menu-item-group>
-						<el-menu-item index="/BookMent">订单分配</el-menu-item>
-						<el-menu-item index="/TextBookRK">订单查询</el-menu-item>
+						<el-menu-item index="/OrderMaster">订单分配</el-menu-item>
+						<el-menu-item index="/AddOrder">订单查询</el-menu-item>
 					</el-menu-item-group>
 				</el-submenu>
 				<el-submenu index="6">
@@ -93,8 +93,8 @@
 						<el-menu-item index="/Client">客户维护</el-menu-item>
 						<el-menu-item index="/Rule">单号规则</el-menu-item>
 						<el-menu-item index="/Grant">单号发放</el-menu-item>
-						<el-menu-item index="8-6">提成维护</el-menu-item>
-						<el-menu-item index="8-6">固定维护</el-menu-item>
+						<el-menu-item index="/TypeM">提成维护</el-menu-item>
+						<el-menu-item index="/CommissionM">固定维护</el-menu-item>
 					</el-menu-item-group>
 				</el-submenu>
 				<el-submenu index="8">
