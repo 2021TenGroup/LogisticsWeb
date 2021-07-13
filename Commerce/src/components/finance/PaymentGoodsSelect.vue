@@ -39,7 +39,7 @@
 						</el-table-column>
 						<el-table-column prop="userName" min-width="50" label="签收员工" align="center">
 						</el-table-column>
-						<el-table-column prop="addtime" min-width="50" label="时间" align="center">
+						<el-table-column prop="addtime" min-width="50" label="签收时间" align="center">
 						</el-table-column>
 					</el-table>
 					<div class="block" style="background:#FFF">

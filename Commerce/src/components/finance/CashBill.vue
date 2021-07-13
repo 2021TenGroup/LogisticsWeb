@@ -37,7 +37,7 @@
 						</el-table-column>
 						<el-table-column prop="cbDeliverType" min-width="50" label="交付类型" align="center" :formatter="cbDeliverTypeFormat">
 						</el-table-column>
-						<el-table-column prop="addname" min-width="50" label="操作员工" align="center">
+						<el-table-column prop="cbFreightType" min-width="50" label="运费类型" align="center" :formatter="cbFreightTypeFormat">
 						</el-table-column>
 						<el-table-column prop="addtime" min-width="50" label="时间" align="center">
 						</el-table-column>
@@ -163,6 +163,13 @@
 					return '寄付'
 				}else{
 					return '到付'
+				}
+			},
+			cbFreightTypeFormat(row,column){
+				if(row.cbFreightType == 0){
+					return '现金'
+				}else{
+					return '其他'
 				}
 			}
 		},
