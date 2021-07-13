@@ -22,6 +22,23 @@ import Emp from '../components/information/Emp.vue'
 /* 单号发放 */
 import Grant from '../components/information/Grant.vue'
 
+/* 代收货款查询 */
+import PaymentGoodsSelect from '../components/finance/PaymentGoodsSelect.vue'
+/* 代收货款管理 */
+import PaymentGoodsManage from '../components/finance/PaymentGoodsManage.vue'
+/* 运费账单 */
+import CashBill from '../components/finance/CashBill.vue'
+/* 维护账单 */
+import MaintenanceSheet from '../components/finance/MaintenanceSheet.vue'
+/* 预付款设置 */
+import AdvancePaymentSetup from '../components/finance/AdvancePaymentSetup.vue'
+/* 充值 */
+import Recharge from '../components/finance/Recharge.vue'
+/* 充值记录 */
+import RechargeRecord from '../components/finance/RechargeRecord.vue'
+/* 测试管理 */
+import DemoManage from '../components/finance/demoManage.vue'
+
 const routes = [{
 		path: '/',
 		redirect: '/HomePage'
@@ -86,6 +103,86 @@ const routes = [{
 			showpanel: Emp
 		}
 	},
+	{
+		path: '/PaymentGoodsSelect',
+		name: 'PaymentGoodsSelect',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: PaymentGoodsSelect
+		}
+	},
+	{
+		path: '/PaymentGoodsManage',
+		name: 'PaymentGoodsManage',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: PaymentGoodsManage
+		}
+	},
+	{
+		path: '/CashBill',
+		name: 'CashBill',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: CashBill
+		}
+	},
+	{
+		path: '/MaintenanceSheet',
+		name: 'MaintenanceSheet',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: MaintenanceSheet
+		}
+	},
+	{
+		path: '/AdvancePaymentSetup',
+		name: 'AdvancePaymentSetup',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: AdvancePaymentSetup
+		}
+	},
+	{
+		path: '/Recharge',
+		name: 'Recharge',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: Recharge
+		}
+	},
+	{
+		path: '/RechargeRecord',
+		name: 'RechargeRecord',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: RechargeRecord
+		}
+	},
+	{
+		path: '/DemoManage',
+		name: 'DemoManage',
+		components: {
+			homepage: HomePage,
+			showleft: ShowLeft,
+			showtop: ShowTop,
+			showpanel: DemoManage
+		}
+	}
 ]
 
 const router = createRouter({

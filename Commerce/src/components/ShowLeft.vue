@@ -1,15 +1,17 @@
 <template>
 	<!-- 左侧导航栏 -->
-	<div class="logo" v-bind:style="{background:this.$store.state.leftcolor , borderBottom:$store.state.leftcolorborder , color:$store.state.fontcolor}">
+	<div class="logo"
+		v-bind:style="{background:this.$store.state.leftcolor , borderBottom:$store.state.leftcolorborder , color:$store.state.fontcolor}">
 		<img src="../assets/logo.png" class="el-img-s" :style="{display:this.$store.state.leftimg}" />
 		<div class="el-label-s" :style="{display:this.$store.state.leftlable,paddingLeft:20+'px'}">火云物流</div>
-		
+
 	</div>
 	<el-row class="tac">
 		<el-col :span="24">
-			<el-menu default-active="0" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :background-color="this.$store.state.leftcolor"
-			 :text-color="this.$store.state.leftfontcolor" :active-text-color="this.$store.state.leftactioncolor" :unique-opened="true"
-			 :collapse-transition="false" :router="true" :collapse="this.$store.state.isCollapse">
+			<el-menu default-active="0" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+				:background-color="this.$store.state.leftcolor" :text-color="this.$store.state.leftfontcolor"
+				:active-text-color="this.$store.state.leftactioncolor" :unique-opened="true"
+				:collapse-transition="false" :router="true" :collapse="this.$store.state.isCollapse">
 				<!-- <el-menu-item index="/HomePage">
 					<i class="el-icon-setting"></i>
 					<span slot="title">首页</span>
@@ -50,15 +52,14 @@
 						<span>财务</span>
 					</template>
 					<el-menu-item-group>
-						<el-menu-item index="/ClassType">预付款设置</el-menu-item>
-						<el-menu-item index="/ClassType">预付款充值</el-menu-item>
-						<el-menu-item index="/ClassType">预付款查询</el-menu-item>
-						<el-menu-item index="/ClassType">财务报表明细</el-menu-item>
-						<el-menu-item index="/ClassType">财务报表汇总</el-menu-item>
-						<el-menu-item index="/ClassType">现金账单</el-menu-item>
-						<el-menu-item index="/ClassType">月结账单</el-menu-item>
-						<el-menu-item index="/ClassType">代收货款查询</el-menu-item>
-						<el-menu-item index="/ClassType">代收货款管理</el-menu-item>
+						<el-menu-item index="/AdvancePaymentSetup">预付款设置</el-menu-item>
+						<el-menu-item index="/Recharge">预付款充值</el-menu-item>
+						<el-menu-item index="/RechargeRecord">预付款充值记录</el-menu-item>
+						<el-menu-item index="/MaintenanceSheet">维护账单</el-menu-item>
+						<el-menu-item index="/CashBill">运费账单</el-menu-item>
+						<el-menu-item index="/PaymentGoodsSelect">代收货款查询</el-menu-item>
+						<el-menu-item index="/PaymentGoodsManage">代收货款管理</el-menu-item>
+						<el-menu-item index="/demoManage">测试管理</el-menu-item>
 					</el-menu-item-group>
 				</el-submenu>
 				<el-submenu index="5">
