@@ -3,15 +3,15 @@
 	<el-row>
 		<el-col :span="23" class="el-center-top-labels" style="border-bottom: 1px solid #e8eaec;">
 			<div class="el-select-table-one-s">
-				编号名称：<el-input v-model="input" placeholder="编号/姓名" clearable class="el-input-one-s"></el-input>
-				选择网点：<el-select v-model="input2" placeholder="选择网点">
+				编号名称：<el-input v-model="pageInfo.value1" placeholder="编号/姓名" clearable class="el-input-one-s"></el-input>
+				选择网点：<el-select v-model="pageInfo.approval" placeholder="选择网点">
 					<el-option v-for="item in OutletsData" :key="item.outletsId" :label="item.outletsName"
 						:value="item.outletsId">
 					</el-option>
 				</el-select>
 			</div>
 			<div class="el-select-table-two-s">
-				<el-button @click="" style="background:#337ab7;border-color: #337ab7;color: #fff;"><i
+				<el-button @click="FindCustomerData()" style="background:#337ab7;border-color: #337ab7;color: #fff;"><i
 						class="el-icon-search"></i> 搜索</el-button>
 				<el-button @click="addCustomer()" style="background:#337ab7;border-color: #337ab7;color: #fff;"><i
 						class="el-icon-circle-plus-outline"></i>添加</el-button>
@@ -198,7 +198,9 @@
 				pageInfo: {
 					currentPage: 1,
 					pagesize: 5,
-					total: 0
+					total: 0,
+					value1:'',
+					approval:''
 				},
 				CustomerData: [],
 				OutletsData: [],
