@@ -2,11 +2,19 @@
 	<!-- 单号发放 -->
 	<el-row>
 		<el-col :span="23" class="el-center-top-labels" style="border-bottom: 1px solid #e8eaec;">
+			<div class="el-select-table-one-s">
+				编号名称：<el-input v-model="input" placeholder="编号/姓名" clearable class="el-input-one-s"></el-input>
+				选择网点：<el-select v-model="input2" placeholder="选择网点">
+					<el-option v-for="item in OutletsData" :key="item.outletsId" :label="item.outletsName"
+						:value="item.outletsId">
+					</el-option>
+				</el-select>
+			</div>
 			<div class="el-select-table-two-s">
 				<el-button @click="" style="background:#337ab7;border-color: #337ab7;color: #fff;"><i
 						class="el-icon-search"></i>搜索</el-button>
 				<el-button @click="addCustomer()" style="background:#337ab7;border-color: #337ab7;color: #fff;">
-					<i class="el-icon-paperclip"></i>添加
+					<i class="el-icon-circle-plus-outline"></i>添加
 				</el-button>
 			</div>
 		</el-col>
@@ -58,54 +66,93 @@
 		</el-col>
 	</el-row>
 	<!-- 弹窗 -->
-	<el-dialog title="单号发放" v-model="dialogVisible" width="40%" :before-close="handleClose">
-		<el-form :model="Numberlssue" :rules="rules" ref="Numberlssue" label-width="100px">
-			<el-form-item label="发放网点:" style="padding-right: 85px;">
-				<el-select v-model="Numberlssue.outletsId" placeholder="请选择">
+	<el-dialog title="添加员工" v-model="dialogVisible" width="40%" :before-close="handleClose">
+		<el-form :model="Emp" :rules="rules" ref="Emp" label-width="100px">
+			<el-form-item label="所属网点:" style="padding-right: 85px;">
+				<el-select v-model="Emp.outletsId" placeholder="请选择">
 					<el-option v-for="item in OutletsData" :key="item.outletsId" :label="item.outletsName"
 						:value="item.outletsId">
 					</el-option>
 				</el-select>
 			</el-form-item>
-			<el-form-item label="开始单号:">
-				<el-input v-model="Numberlssue.numberlssueOrder" placeholder="请输入备注"></el-input>
+			<el-form-item label="员工编号:">
+				<el-input v-model="Emp.empNumber" placeholder="请输入备注"></el-input>
 			</el-form-item>
-			<el-form-item label="发放数量:">
-				<el-input-number @change="handleChange" :min="1" :max="100" v-model="Numberlssue.numberlssueNumber"
-					placeholder="请输入长度">
-				</el-input-number>
+			<el-form-item label="姓名:">
+				<el-input v-model="Emp.empName" placeholder="请输入备注"></el-input>
 			</el-form-item>
-			<el-form-item label="备注:">
-				<el-input v-model="Numberlssue.numberlssueRemarks" placeholder="请输入备注"></el-input>
+			<el-form-item label="用户名:">
+				<el-input v-model="Emp.userName" placeholder="请输入备注"></el-input>
 			</el-form-item>
+			<el-form-item label="密码:">
+				<el-input v-model="Emp.passWord" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			<el-form-item label="手机:">
+				<el-input v-model="Emp.phone" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			<el-form-item label="岗位:">
+				<el-input v-model="Emp.positionId" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			<el-form-item label="身份证号:">
+				<el-input v-model="Emp.identityCards" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			<el-form-item label="地址:">
+				<el-input v-model="Emp.address" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			身份证照片:
+			<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"
+				:show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+				<img v-if="imageUrl" :src="imageUrl" class="avatar">
+				<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+			</el-upload>
 			<el-form-item style="margin-right: 80px;" class="el-form-butt-show-one-s">
 				<el-button type="primary" @click="addCustomer2()"><i class="el-icon-s-promotion"></i>提交</el-button>
 			</el-form-item>
 		</el-form>
 	</el-dialog>
 	<!-- 弹窗 -->
-	<el-dialog title="单号发放" v-model="dialogVisible2" width="40%" :before-close="handleClose">
-		<el-form :model="Numberlssue" :rules="rules" ref="Numberlssue" label-width="100px">
-			<el-form-item label="发放网点:" style="padding-right: 85px;">
-				<el-select v-model="Numberlssue.outletsId" placeholder="请选择">
+	<el-dialog title="编辑员工" v-model="dialogVisible2" width="40%" :before-close="handleClose">
+		<el-form :model="Emp" :rules="rules" ref="Emp" label-width="100px">
+			<el-form-item label="所属网点:" style="padding-right: 85px;">
+				<el-select v-model="Emp.outletsId" placeholder="请选择">
 					<el-option v-for="item in OutletsData" :key="item.outletsId" :label="item.outletsName"
 						:value="item.outletsId">
 					</el-option>
 				</el-select>
 			</el-form-item>
-			<el-form-item label="开始单号:">
-				<el-input v-model="Numberlssue.numberlssueOrder" placeholder="请输入备注"></el-input>
+			<el-form-item label="员工编号:">
+				<el-input v-model="Emp.empNumber" placeholder="请输入备注"></el-input>
 			</el-form-item>
-			<el-form-item label="发放数量:">
-				<el-input-number @change="handleChange" :min="1" :max="100" v-model="Numberlssue.numberlssueNumber"
-					placeholder="请输入长度">
-				</el-input-number>
+			<el-form-item label="姓名:">
+				<el-input v-model="Emp.empName" placeholder="请输入备注"></el-input>
 			</el-form-item>
-			<el-form-item label="备注:">
-				<el-input v-model="Numberlssue.numberlssueRemarks" placeholder="请输入备注"></el-input>
+			<el-form-item label="用户名:">
+				<el-input v-model="Emp.userName" placeholder="请输入备注"></el-input>
 			</el-form-item>
+			<el-form-item label="密码:">
+				<el-input v-model="Emp.passWord" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			<el-form-item label="手机:">
+				<el-input v-model="Emp.phone" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			<el-form-item label="岗位:">
+				<el-input v-model="Emp.positionId" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			<el-form-item label="身份证号:">
+				<el-input v-model="Emp.identityCards" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			<el-form-item label="地址:">
+				<el-input v-model="Emp.address" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			身份证照片:
+			<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"
+				:show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+				<img v-if="imageUrl" :src="imageUrl" class="avatar">
+				<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+			</el-upload>
+			<img :src="imageUrl" width="128" alt="imageUrl" height="146" />
 			<el-form-item style="margin-right: 80px;" class="el-form-butt-show-one-s">
-				<el-button type="primary" @click="updateCustomer()">提交</el-button>
+				<el-button type="primary" @click="updateCustomer()"><i class="el-icon-s-promotion"></i>提交</el-button>
 			</el-form-item>
 		</el-form>
 	</el-dialog>
@@ -132,6 +179,8 @@
 						}
 					]
 				},
+				imageUrl: '',
+				
 				Emp: {
 					empId:"",
 					positionId:"",
@@ -185,12 +234,32 @@
 			handleChange(value) {
 				console.log(value);
 			},
+			handleAvatarSuccess(res, file) {
+				console.log(res)
+				console.log(file.name)
+				var abc = "../../../static/" + file.name
+				console.log(abc)
+				this.Emp.zPhotographs = abc
+				this.imageUrl = URL.createObjectURL(file.raw);
+			},
+			beforeAvatarUpload(file) {
+				const isJPG = file.type === 'image/jpeg';
+				const isLt2M = file.size / 1024 / 1024 < 2;
+			
+				if (!isJPG) {
+					this.$message.error('上传头像图片只能是 JPG 格式!');
+				}
+				if (!isLt2M) {
+					this.$message.error('上传头像图片大小不能超过 2MB!');
+				}
+				return isJPG && isLt2M;
+			},
 			indexMethod(index) {
 				return index + 1 + (this.pageInfo.currentPage - 1) * this.pageInfo.pagesize;
 			},
 			delCustomer(row) {
-				this.Numberlssue.numberlssueId = row.numberlssueId
-				this.Numberlssue.deletename = this.$store.state.loginname
+				this.Emp.empId = row.empId
+				this.Emp.deletename = this.$store.state.loginname
 				const _this = this
 				var flag = true
 				this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
@@ -198,7 +267,7 @@
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-					this.axios.put("http://localhost:8089/Logistics/deleteByNumberLssue", this.Numberlssue)
+					this.axios.put("http://localhost:8089/Logistics/deleteByEmps", this.Emp)
 						.then(function(response) {
 							_this.FindCustomerData();
 						}).catch(function(error) {
@@ -213,11 +282,11 @@
 			},
 			addCustomer2() {
 				console.log("添加成功")
-				this.Numberlssue.addname = this.$store.state.loginname
-				this.Numberlssue.timeliness = 0
-				this.Numberlssue.numberlssueUp = 0
+				this.Emp.addname = this.$store.state.loginname
+				this.Emp.zPhotographs = this.imageUrl
+				this.Emp.timeliness = 0
 				const _this = this
-				this.axios.post("http://localhost:8089/Logistics/addNumberLssue", this.Numberlssue)
+				this.axios.post("http://localhost:8089/Logistics/addEmps", this.Emp)
 					.then(function(response) {
 						_this.FindCustomerData();
 						_this.dialogVisible = false
@@ -226,20 +295,26 @@
 					})
 			},
 			showEdit(row) {
-				this.Numberlssue.outletsId = row.outletsId
-				this.Numberlssue.numberlssueId = row.numberlssueId
-				this.Numberlssue.numberlssueOrder = row.numberlssueOrder
-				this.Numberlssue.numberlssueNumber = row.numberlssueNumber
-				this.Numberlssue.numberlssueEnd = row.numberlssueEnd
-				this.Numberlssue.numberlssueUp = row.numberlssueUp
-				this.Numberlssue.numberlssueRemarks = row.numberlssueRemarks
-				this.Numberlssue.updatename = this.$store.state.loginname
-				this.Numberlssue.addname = null
+				this.Emp.empId = row.empId
+				this.Emp.positionId = row.positionId
+				this.Emp.outletsId = row.outletsId
+				this.Emp.empNumber = row.empNumber
+				this.Emp.userName = row.userName
+				this.Emp.passWord = row.passWord
+				this.Emp.phone = row.phone
+				this.Emp.identityCards = row.identityCards
+				this.Emp.address = row.address
+				this.Emp.zPhotographs = row.zPhotographs
+				this.imageUrl = row.zPhotographs
+				this.Emp.fPhotographs = row.fPhotographs
+				this.Emp.empName = row.empName
+				this.Emp.updatename = this.$store.state.loginname
+				this.Emp.addname = null
 				this.dialogVisible2 = true
 			},
 			updateCustomer() {
 				const _this = this
-				this.axios.put("http://localhost:8089/Logistics/updateNumberLssue", this.Numberlssue)
+				this.axios.put("http://localhost:8089/Logistics/updateEmps", this.Emp)
 					.then(function(response) {
 						_this.dialogVisible2 = false
 						_this.FindCustomerData();

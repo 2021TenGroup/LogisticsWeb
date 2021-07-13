@@ -1,27 +1,9 @@
 <template>
 	<!-- 网点维护 -->
 	<el-row>
-		<el-col :span="23" class="el-center-top-labels" style="border-bottom: 1px solid #e8eaec;">
-			<div class="el-select-table-one-s">
-				编号名称：<el-input v-model="input" placeholder="编号/姓名" clearable class="el-input-one-s"></el-input>
-				<!-- 选择网点：<el-select v-model="input2" placeholder="选择网点">
-					<el-option v-for="item in OutletsData" :key="item.outletsId" :label="item.outletsName"
-						:value="item.outletsId">
-					</el-option>
-				</el-select> -->
-			</div>
-			<div class="el-select-table-two-s">
-				<!-- <el-button @click="" style="background:#337ab7;border-color: #337ab7;color: #fff;"><i
-						class="el-icon-search"></i> 搜索</el-button>
-				<el-button @click="addCustomer()" style="background:#337ab7;border-color: #337ab7;color: #fff;"><i
-						class="el-icon-circle-plus-outline"></i>添加</el-button> -->
-				<!-- <el-button :disabled="this.multipleSelection.length === 0"
-					@click="deleteCourseDetail(multipleSelection)" type="danger" style="background:#337ab7;border-color: #337ab7;color: #fff;">- 批量删除
-				</el-button> -->
-			</div>
-		</el-col>
+
 	</el-row>
-	<el-row class="el-show-over-menu-s">
+	<el-row class="el-show-over-menu-s" style="margin-top:20px;">
 		<el-col :span="9" class="el-show-left-menu-s">
 			<div class="ivu-mb ivu-card ivu-card-dis-hover">
 				<div class="ivu-card-head6">
@@ -49,14 +31,16 @@
 					<div style="height: 249px;overflow: auto;">
 						<div class="ivu-menu-bodys-one">
 							<div class="ivu-menu-bodys-two">
-								<el-input v-model="input" placeholder="输入菜单名称搜索"></el-input>
+								<el-input placeholder="输入关键字进行过滤" v-model="filterText">
+								</el-input>
 								<i class="ivu-menu-bodys-three-icon el-icon-search"></i>
 							</div>
 						</div>
 						<div class="ivu-tree">
-							<el-tree :data="data" show-checkbox node-key="id" :props="defaultProps"
-								:default-expand-all="true" :render-after-expand="false" :accordion="true"
-								:check-strictly="true">
+							<!-- <el-tree class="filter-tree" :data="OutletsData" :props="defaultProps" default-expand-all
+								:filter-node-method="filterNode" ref="tree"> -->
+							<el-tree @click="showwd(abdf)" v-model="abdf" :data="OutletsData" node-key="id" :default-checked-keys="xz" :props="defaultProps"
+								ref="tree" :check-strictly="true">
 							</el-tree>
 						</div>
 					</div>
@@ -99,60 +83,91 @@
 
 <script>
 	import {
-		defineComponent,
-		ref
-	} from 'vue'
-	export default defineComponent({
-		setup() {
+		ElMessage
+	} from 'element-plus'
+	import qs from 'qs'
+	export default {
+		data() {
 			return {
-				input: ref(''),
+				input: "",
+				OutletsData: [],
+				xz: [],
 				form: {
 					name: '',
 					paths: ''
 				},
+				abdf:"",
 				visible: false,
-				data: [{
-					id: 1,
-					label: '一级 1',
-					children: [{
-						id: 4,
-						label: '二级 1-1',
-						children: [{
-							id: 9,
-							label: '三级 1-1-1'
-						}, {
-							id: 10,
-							label: '三级 1-1-2'
-						}]
-					}]
-				}, {
-					id: 2,
-					label: '一级 2',
-					children: [{
-						id: 5,
-						label: '二级 2-1'
-					}, {
-						id: 6,
-						label: '二级 2-2'
-					}]
-				}, {
-					id: 3,
-					label: '一级 3',
-					children: [{
-						id: 7,
-						label: '二级 3-1'
-					}, {
-						id: 8,
-						label: '二级 3-2'
-					}]
-				}],
+				filterText: '',
 				defaultProps: {
 					children: 'children',
-					label: 'label'
+					label: 'outletsName'
 				}
 			}
+		},
+		watch: {
+			filterText(val) {
+				this.$refs.tree.filter(val);
+			}
+		},
+		methods: {
+			filterNode(value, data) {
+				if (!value) return true;
+				return data.label.indexOf(value) !== -1;
+			},
+			selectAllRoleByEmpId() {
+				this.xz = [];
+				const _this = this;
+				this.axios.get("http://localhost:8089/Logistics/selectAllOutletsList", {
+						params: this.OutletsData
+					})
+					.then(function(response) {
+						_this.OutletsData = response.data
+						_this.OutletsData.forEach((item) => {
+							_this.xz.push(item.outletsId)
+						})
+						_this.$nextTick(() => {
+							_this.$refs.tree.setCheckedKeys(_this.xz);
+						});
+					}).catch(function(error) {
+						console.log(error)
+					})
+			},
+			showwd(id){
+				console.log(id)
+				console.log("22222222")
+				console.log("abdf")
+			}
+		},
+		created() {
+			this.xz = [];
+			const _this = this;
+			this.axios.get("http://localhost:8089/Logistics/selectAllOutletsList", {
+					params: this.OutletsData
+				})
+				.then(function(response) {
+					_this.OutletsData = response.data.data
+					_this.OutletsData.forEach((item) => {
+						_this.xz.push(item.outletsId)
+					})
+					_this.$nextTick(() => {
+						_this.$refs.tree.setCheckedKeys(_this.xz);
+					});
+				}).catch(function(error) {
+					console.log(error)
+				})
+			this.axios.get("http://localhost:8089/Logistics/selectAllOutletsList", {
+					params: this.OutletsData
+				})
+				.then(function(response) {
+					console.log(response)
+					_this.OutletsData = response.data.data
+					console.log(_this.OutletsData)
+				}).catch(function(error) {
+					console.log(error)
+				})
 		}
-	})
+	}
 </script>
 
 <style>
