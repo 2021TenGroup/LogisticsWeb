@@ -8,15 +8,18 @@
 			<div class="ivu-mb ivu-card ivu-card-dis-hover">
 				<div class="ivu-card-head6">
 					<div class="el-div-show-butt-one">
-						<el-button @click="addwd()" class="el-show-butt-two-s" style="color: #fff;background-color: #337ab7;border-color: #337ab7;">
+						<el-button @click="addwd()" class="el-show-butt-two-s"
+							style="color: #fff;background-color: #337ab7;border-color: #337ab7;">
 							<i class="el-icon-circle-plus-outline"></i>
 							新增
 						</el-button>
-						<el-button class="el-show-butt-two-s" style="color: #fff;background-color: #337ab7;border-color: #337ab7;">
+						<el-button @click="showedit()" class="el-show-butt-two-s"
+							style="color: #fff;background-color: #337ab7;border-color: #337ab7;">
 							<i class="el-icon-edit"></i>
 							编辑
 						</el-button>
-						<el-button class="el-show-butt-two-s" style="color: #fff;background-color: #d9534f;border-color: #d9534f;">
+						<el-button @click="delCustomer()" class="el-show-butt-two-s"
+							style="color: #fff;background-color: #d9534f;border-color: #d9534f;">
 							<i class="el-icon-delete"></i>
 							删除
 						</el-button>
@@ -57,122 +60,257 @@
 			<div class="el-show-right-menus-two">
 				<div>
 					<el-form ref="Outletsvalue" :model="Outletsvalue" label-width="80px">
-						<div class="ivu-card-body-one">
-							<div class="ivu-description-list">
-								<div class="el-div-show-input-one">
-									<div class="ivu-description-detail">
-										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsNumber"
-											disabled placeholder="网点编码">
-										</el-input>
+						<div :style="{display:showtable1}">
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsNumber"
+												disabled placeholder="网点编码">
+											</el-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsName"
+												disabled placeholder="网点名称">
+											</el-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s"
+												v-model="Outletsvalue.outletsBelonging" disabled placeholder="所属网点">
+											</el-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsPerson"
+												disabled placeholder="负责人">
+											</el-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsPhone"
+												disabled placeholder="手机号码">
+											</el-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsProvince"
+												disabled placeholder="省份">
+											</el-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsCity"
+												disabled placeholder="城市">
+											</el-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsRegion"
+												disabled placeholder="区域">
+											</el-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsAddress"
+												disabled placeholder="地址">
+											</el-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ivu-card-body-one" style="width:507px">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsRemarks"
+												disabled placeholder="备注">
+											</el-input>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="ivu-card-body-one">
-							<div class="ivu-description-list">
-								<div class="el-div-show-input-one">
-									<div class="ivu-description-detail">
-										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsName"
-											disabled placeholder="网点名称">
-										</el-input>
+						<div :style="{display:showtable2}">
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsNumber"
+												placeholder="网点编码">
+											</el-input>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="ivu-card-body-one">
-							<div class="ivu-description-list">
-								<div class="el-div-show-input-one">
-									<div class="ivu-description-detail">
-										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsBelonging"
-											disabled placeholder="所属网点">
-										</el-input>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsName"
+												placeholder="网点名称">
+											</el-input>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="ivu-card-body-one">
-							<div class="ivu-description-list">
-								<div class="el-div-show-input-one">
-									<div class="ivu-description-detail">
-										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsPerson"
-											disabled placeholder="负责人">
-										</el-input>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" :disabled="readOnly"
+												placeholder="所属网点">
+											</el-input>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="ivu-card-body-one">
-							<div class="ivu-description-list">
-								<div class="el-div-show-input-one">
-									<div class="ivu-description-detail">
-										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsPhone"
-											disabled placeholder="手机号码">
-										</el-input>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsPerson"
+												placeholder="负责人">
+											</el-input>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="ivu-card-body-one">
-							<div class="ivu-description-list">
-								<div class="el-div-show-input-one">
-									<div class="ivu-description-detail">
-										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsProvince"
-											disabled placeholder="省份">
-										</el-input>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsPhone"
+												placeholder="手机号码">
+											</el-input>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="ivu-card-body-one">
-							<div class="ivu-description-list">
-								<div class="el-div-show-input-one">
-									<div class="ivu-description-detail">
-										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsCity"
-											disabled placeholder="城市">
-										</el-input>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<!-- <el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsProvince"
+												placeholder="省份"> 
+												</el-input>-->
+											<el-select v-model="Outletsvalue.outletsProvince" placeholder="省份">
+												<el-option v-for="item in adressdata1" :key="item.uname"
+													:label="item.uname" :value="item.uname">
+												</el-option>
+											</el-select>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="ivu-card-body-one">
-							<div class="ivu-description-list">
-								<div class="el-div-show-input-one">
-									<div class="ivu-description-detail">
-										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsRegion"
-											disabled placeholder="区域">
-										</el-input>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<!-- <el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsCity"
+												placeholder="城市">
+											</el-input> -->
+											<el-select @click="showcity()" v-model="Outletsvalue.outletsCity"
+												placeholder="城市">
+												<el-option v-for="item in adressdata2" :key="item.uname"
+													:label="item.uname" :value="item.uname">
+												</el-option>
+											</el-select>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="ivu-card-body-one">
-							<div class="ivu-description-list">
-								<div class="el-div-show-input-one">
-									<div class="ivu-description-detail">
-										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsAddress"
-											disabled placeholder="地址">
-										</el-input>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<!-- <el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsRegion"
+												placeholder="区域">
+											</el-input> -->
+											<el-select @click="showqu()" v-model="Outletsvalue.outletsRegion"
+												placeholder="区域">
+												<el-option v-for="item in adressdata3" :key="item.uname"
+													:label="item.uname" :value="item.uname">
+												</el-option>
+											</el-select>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="ivu-card-body-one" style="width:507px">
-							<div class="ivu-description-list">
-								<div class="el-div-show-input-one">
-									<div class="ivu-description-detail">
-										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsRemarks"
-											disabled placeholder="备注">
-										</el-input>
+							<div class="ivu-card-body-one">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsAddress"
+												placeholder="地址">
+											</el-input>
+										</div>
 									</div>
 								</div>
 							</div>
+							<div class="ivu-card-body-one" style="width:507px">
+								<div class="ivu-description-list">
+									<div class="el-div-show-input-one">
+										<div class="ivu-description-detail">
+											<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsRemarks"
+												placeholder="备注">
+											</el-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<el-form-item class="el-show-right-menus-input-two">
+								<el-button :style="{display:showbutton1}" @click="addCustomer2()" class="el-show-btn-two-log-s" type="primary">
+									<i class="el-icon-document"></i>
+									保存
+								</el-button>
+								<el-button :style="{display:showbutton2}" @click="updateCustomer()" class="el-show-btn-two-log-s" type="primary">
+									<i class="el-icon-document"></i>
+									保存
+								</el-button>
+							</el-form-item>
 						</div>
-						<el-form-item class="el-show-right-menus-input-two">
-							<el-button class="el-show-btn-two-log-s" type="primary" style="display:none;">
-								<i class="el-icon-document"></i>
-								保存
-							</el-button>
-						</el-form-item>
 					</el-form>
 				</div>
 			</div>
@@ -211,6 +349,15 @@
 					deletetime: "",
 					timeliness: ""
 				},
+				showtable1: "block",
+				showtable2: "none",
+				adressdata1: [{
+					uname: "湖南省"
+				}, {
+					uname: "湖北省"
+				}],
+				adressdata2: [],
+				adressdata3: [],
 				xz: [],
 				form: {
 					name: '',
@@ -218,6 +365,8 @@
 				},
 				abdf: "",
 				visible: false,
+				showbutton1:"block",
+				showbutton2:"none",
 				filterText: '',
 				defaultProps: {
 					children: 'children',
@@ -235,8 +384,64 @@
 				if (!value) return true;
 				return data.label.indexOf(value) !== -1;
 			},
-			addwd(){
-				
+			addwd() {
+				if (Number(this.$refs.tree.getCheckedKeys()) == 0) {
+					console.log("失败")
+					ElMessage.warning({
+						message: '请先选中一个网点',
+						type: 'warning'
+					});
+				} else {
+					Object.keys(this.Outletsvalue).forEach((key) => (this.Outletsvalue[key] = ""))
+					this.showtable1 = "none"
+					this.showtable2 = "block"
+					this.showbutton1="block"
+					this.showbutton2="none"
+				}
+			},
+			delCustomer() {
+				this.Outletsvalue.outletsId = Number(this.$refs.tree.getCheckedKeys())
+				this.Outletsvalue.deletename = this.$store.state.loginname
+				const _this = this
+				var flag = true
+				this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
+					this.axios.put("http://localhost:8089/Logistics/delOutletsVo", this.Outletsvalue)
+						.then(function(response) {
+							_this.FindCustomerData();
+							Object.keys(_this.Outletsvalue).forEach((key) => (_this.Outletsvalue[key] = ""))
+							_this.showtable1="block"
+							_this.showtable2="none"
+						}).catch(function(error) {
+							console.log(error)
+						})
+				}).catch(() => {
+					this.$message({
+						type: 'error',
+						message: '取消删除!'
+					});
+				});
+			},
+			showedit() {
+				/* this.showtable1="none"
+				this.showtable2="block" */
+				if (Number(this.$refs.tree.getCheckedKeys()) == 0) {
+					console.log("失败")
+					ElMessage.warning({
+						message: '请先选中一个网点',
+						type: 'warning'
+					});
+				} else {
+					console.log("成功")
+					this.showtable1="none"
+					this.showtable2="block"
+					this.getCheckedKeys()
+					this.showbutton1="none"
+					this.showbutton2="block"
+				}
 			},
 			selectAllRoleByEmpId() {
 				this.xz = [];
@@ -255,6 +460,141 @@
 					}).catch(function(error) {
 						console.log(error)
 					})
+			},
+			addCustomer2() {
+				if (Number(this.$refs.tree.getCheckedKeys()) == 0) {
+					console.log("失败")
+					ElMessage.warning({
+						message: '请先选中一个网点',
+						type: 'warning'
+					});
+				} else {
+					console.log("添加成功")
+					this.Outletsvalue.addname = this.$store.state.loginname
+					this.Outletsvalue.timeliness = 0
+					const _this = this
+					this.axios.post("http://localhost:8089/Logistics/addOutlets", this.Outletsvalue)
+						.then(function(response) {
+							_this.FindCustomerData();
+							Object.keys(_this.Outletsvalue).forEach((key) => (_this.Outletsvalue[key] = ""))
+							_this.showtable2 = "none"
+							_this.showtable1 = "block"
+						}).catch(function(error) {
+							console.log(error)
+						})
+				}
+			},
+			updateCustomer() {
+				this.Outletsvalue.outletsId = Number(this.$refs.tree.getCheckedKeys())
+				const _this = this
+				this.axios.put("http://localhost:8089/Logistics/updateOutlets", this.Outletsvalue)
+					.then(function(response) {
+						_this.FindCustomerData();
+						_this.showtable2 = "none"
+						_this.showtable1 = "block"
+					}).catch(function(error) {
+						console.log(error)
+					})
+			},
+			FindCustomerData() {
+				this.xz = [];
+				const _this = this;
+				this.axios.get("http://localhost:8089/Logistics/selectAllOutletsList", {
+						params: this.OutletsData
+					})
+					.then(function(response) {
+						_this.OutletsData = response.data.data
+						_this.OutletsData.forEach((item) => {
+							_this.xz.push(item.outletsId)
+						})
+						_this.$nextTick(() => {
+							_this.$refs.tree.setCheckedKeys([]);
+						});
+					}).catch(function(error) {
+						console.log(error)
+					})
+				this.axios.get("http://localhost:8089/Logistics/selectAllOutletsList", {
+						params: this.OutletsData
+					})
+					.then(function(response) {
+						console.log(response)
+						_this.OutletsData = response.data.data
+						console.log(_this.OutletsData)
+					}).catch(function(error) {
+						console.log(error)
+					})
+			},
+			showcity() {
+				console.log(this.Outletsvalue.outletsProvince)
+				if (this.Outletsvalue.outletsProvince == '湖南省') {
+					this.adressdata2 = [{
+						uname: "长沙市"
+					}, {
+						uname: "株洲市"
+					}, {
+						uname: "湘潭市"
+					}]
+				} else if (this.Outletsvalue.outletsProvince == '湖北省') {
+					this.adressdata2 = [{
+						uname: "武汉市"
+					}, {
+						uname: "宜昌市"
+					}, {
+						uname: "荆州市"
+					}]
+				}
+			},
+			showqu() {
+				console.log(this.Outletsvalue.outletsProvince)
+				if (this.Outletsvalue.outletsCity == '长沙市') {
+					this.adressdata3 = [{
+						uname: "天心区"
+					}, {
+						uname: "芙蓉区"
+					}, {
+						uname: "岳麓区"
+					}]
+				} else if (this.Outletsvalue.outletsCity == '株洲市') {
+					this.adressdata3 = [{
+						uname: "芦淞区"
+					}, {
+						uname: "天元区"
+					}, {
+						uname: "荷塘区"
+					}]
+				} else if (this.Outletsvalue.outletsCity == '湘潭市') {
+					this.adressdata3 = [{
+						uname: "雨湖区"
+					}, {
+						uname: "岳塘区"
+					}, {
+						uname: "韶山区"
+					}]
+				} else if (this.Outletsvalue.outletsCity == '武汉市') {
+					this.adressdata3 = [{
+						uname: "江汉区"
+					}, {
+						uname: "武昌区"
+					}, {
+						uname: "汉阳区"
+					}]
+				} else if (this.Outletsvalue.outletsCity == '宜昌市') {
+					this.adressdata3 = [{
+						uname: "西陵区"
+					}, {
+						uname: "夷陵区"
+					}, {
+						uname: "伍家岗区"
+					}]
+				} else if (this.Outletsvalue.outletsCity == '荆州市') {
+					this.adressdata3 = [{
+						uname: "荆州区"
+					}, {
+						uname: "沙市区"
+					}, {
+						uname: "经济技术开发区"
+					}]
+				}
 			},
 			getCheckedKeys() {
 				console.log(Number(this.$refs.tree.getCheckedKeys()));
@@ -370,9 +710,10 @@
 	}
 
 	.ivu-menu-body-one-s {
-		height: 249px;
+		height: 350px;
 		padding: 16px;
 		margin-right: 3px;
+		box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
 	}
 
 	.ivu-menu-bodys-one {
@@ -443,7 +784,9 @@
 
 	.el-show-right-menus-two {
 		padding: 16px;
-		height: 225px;
+		height: 357px;
+		background: #FFF;
+		box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
 	}
 
 	.el-show-right-menus-input-one {
@@ -474,15 +817,5 @@
 		-webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
 		transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
 		width: 100%;
-	}
-
-	.el-form-item__content {
-		-webkit-box-flex: 1;
-		-ms-flex: 1;
-		flex: 1;
-		line-height: 40px;
-		position: relative;
-		font-size: 14px;
-		margin-left: 230px;
 	}
 </style>

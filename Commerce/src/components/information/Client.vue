@@ -28,8 +28,6 @@
 					<el-table :data="CustomerData" @selection-change="handleSelectionChange" stripe
 						class="el-table-one-s" ref="multipleTable"
 						:header-cell-style="{background:'rgb(238, 241, 246) none repeat scroll 0% 0%',color:'#606266'}">
-						<el-table-column type="selection" min-width="50">
-						</el-table-column>
 						<el-table-column min-width="20" type="index" align="center" :index="indexMethod" label="序号">
 						</el-table-column>
 						<el-table-column prop="customerNumber" min-width="50" label="客户编号" align="center">

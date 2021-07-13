@@ -76,28 +76,28 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item label="员工编号:">
-				<el-input v-model="Emp.empNumber" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.empNumber" placeholder="请输入员工编号"></el-input>
 			</el-form-item>
 			<el-form-item label="姓名:">
-				<el-input v-model="Emp.empName" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.empName" placeholder="请输入姓名"></el-input>
 			</el-form-item>
 			<el-form-item label="用户名:">
-				<el-input v-model="Emp.userName" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.userName" placeholder="请输入用户名"></el-input>
 			</el-form-item>
 			<el-form-item label="密码:">
-				<el-input v-model="Emp.passWord" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.passWord" placeholder="请输入密码"></el-input>
 			</el-form-item>
 			<el-form-item label="手机:">
-				<el-input v-model="Emp.phone" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.phone" placeholder="请输入手机"></el-input>
 			</el-form-item>
 			<el-form-item label="岗位:">
-				<el-input v-model="Emp.positionId" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.positionId" placeholder="请输入岗位"></el-input>
 			</el-form-item>
 			<el-form-item label="身份证号:">
-				<el-input v-model="Emp.identityCards" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.identityCards" placeholder="请输入身份证号"></el-input>
 			</el-form-item>
 			<el-form-item label="地址:">
-				<el-input v-model="Emp.address" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.address" placeholder="请输入地址"></el-input>
 			</el-form-item>
 			身份证照片:
 			<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"
@@ -121,28 +121,28 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item label="员工编号:">
-				<el-input v-model="Emp.empNumber" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.empNumber" placeholder="请输入员工编号"></el-input>
 			</el-form-item>
 			<el-form-item label="姓名:">
-				<el-input v-model="Emp.empName" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.empName" placeholder="请输入姓名"></el-input>
 			</el-form-item>
 			<el-form-item label="用户名:">
-				<el-input v-model="Emp.userName" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.userName" placeholder="请输入用户名"></el-input>
 			</el-form-item>
 			<el-form-item label="密码:">
-				<el-input v-model="Emp.passWord" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.passWord" placeholder="请输入密码"></el-input>
 			</el-form-item>
 			<el-form-item label="手机:">
-				<el-input v-model="Emp.phone" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.phone" placeholder="请输入手机"></el-input>
 			</el-form-item>
 			<el-form-item label="岗位:">
-				<el-input v-model="Emp.positionId" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.positionId" placeholder="请输入岗位"></el-input>
 			</el-form-item>
 			<el-form-item label="身份证号:">
-				<el-input v-model="Emp.identityCards" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.identityCards" placeholder="请输入身份证号"></el-input>
 			</el-form-item>
 			<el-form-item label="地址:">
-				<el-input v-model="Emp.address" placeholder="请输入备注"></el-input>
+				<el-input v-model="Emp.address" placeholder="请输入地址"></el-input>
 			</el-form-item>
 			身份证照片:
 			<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"
