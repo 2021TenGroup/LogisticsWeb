@@ -8,22 +8,17 @@
 			<div class="ivu-mb ivu-card ivu-card-dis-hover">
 				<div class="ivu-card-head6">
 					<div class="el-div-show-butt-one">
-						<el-popover placement="top-start" title="标题" :width="200" trigger="hover"
-							content="<p>这是一段内容,这是一段内容,这是一段内容,这是一段内容。</p>">
-							<template #reference>
-								<el-button plain class="el-show-butt-ons-s">
-									添加菜单
-									<i class="el-icon-caret-bottom"></i>
-								</el-button>
-							</template>
-						</el-popover>
-						<el-button plain class="el-show-butt-two-s">
-							<i class="el-icon-copy-document"></i>
-							全部收起
+						<el-button @click="addwd()" class="el-show-butt-two-s" style="color: #fff;background-color: #337ab7;border-color: #337ab7;">
+							<i class="el-icon-circle-plus-outline"></i>
+							新增
 						</el-button>
-						<el-button plain type="danger" class="el-show-butt-two-s">
-							<i class="el-icon-delete-solid"></i>
-							批量删除
+						<el-button class="el-show-butt-two-s" style="color: #fff;background-color: #337ab7;border-color: #337ab7;">
+							<i class="el-icon-edit"></i>
+							编辑
+						</el-button>
+						<el-button class="el-show-butt-two-s" style="color: #fff;background-color: #d9534f;border-color: #d9534f;">
+							<i class="el-icon-delete"></i>
+							删除
 						</el-button>
 					</div>
 				</div>
@@ -39,8 +34,9 @@
 						<div class="ivu-tree">
 							<!-- <el-tree class="filter-tree" :data="OutletsData" :props="defaultProps" default-expand-all
 								:filter-node-method="filterNode" ref="tree"> -->
-							<el-tree @click="showwd(abdf)" v-model="abdf" :data="OutletsData" node-key="id" :default-checked-keys="xz" :props="defaultProps"
-								ref="tree" :check-strictly="true">
+							<el-tree @click="getCheckedKeys" show-checkbox v-model="abdf" :data="OutletsData"
+								node-key="outletsId" :default-checked-keys="xz" :props="defaultProps" ref="tree"
+								:check-strictly="true">
 							</el-tree>
 						</div>
 					</div>
@@ -54,25 +50,128 @@
 						<i class="el-icon-s-grid"></i>
 					</span>
 					<span class="el-show-right-menus-one-two">
-						编辑菜单：首页
+						网点信息
 					</span>
 				</div>
 			</div>
 			<div class="el-show-right-menus-two">
 				<div>
-					<el-form ref="form" :model="form" label-width="80px">
-						<el-form-item label="类型:" class="el-show-right-menus-input-one" style="text-align: left;">
-							<span>顶栏菜单</span>
-						</el-form-item>
-						<el-form-item label="标题:" class="el-show-right-menus-input-one">
-							<el-input v-model="form.name"></el-input>
-						</el-form-item>
-						<el-form-item label="路径:" class="el-show-right-menus-input-one">
-							<el-input v-model="form.paths"></el-input>
-						</el-form-item>
+					<el-form ref="Outletsvalue" :model="Outletsvalue" label-width="80px">
+						<div class="ivu-card-body-one">
+							<div class="ivu-description-list">
+								<div class="el-div-show-input-one">
+									<div class="ivu-description-detail">
+										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsNumber"
+											disabled placeholder="网点编码">
+										</el-input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ivu-card-body-one">
+							<div class="ivu-description-list">
+								<div class="el-div-show-input-one">
+									<div class="ivu-description-detail">
+										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsName"
+											disabled placeholder="网点名称">
+										</el-input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ivu-card-body-one">
+							<div class="ivu-description-list">
+								<div class="el-div-show-input-one">
+									<div class="ivu-description-detail">
+										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsBelonging"
+											disabled placeholder="所属网点">
+										</el-input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ivu-card-body-one">
+							<div class="ivu-description-list">
+								<div class="el-div-show-input-one">
+									<div class="ivu-description-detail">
+										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsPerson"
+											disabled placeholder="负责人">
+										</el-input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ivu-card-body-one">
+							<div class="ivu-description-list">
+								<div class="el-div-show-input-one">
+									<div class="ivu-description-detail">
+										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsPhone"
+											disabled placeholder="手机号码">
+										</el-input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ivu-card-body-one">
+							<div class="ivu-description-list">
+								<div class="el-div-show-input-one">
+									<div class="ivu-description-detail">
+										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsProvince"
+											disabled placeholder="省份">
+										</el-input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ivu-card-body-one">
+							<div class="ivu-description-list">
+								<div class="el-div-show-input-one">
+									<div class="ivu-description-detail">
+										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsCity"
+											disabled placeholder="城市">
+										</el-input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ivu-card-body-one">
+							<div class="ivu-description-list">
+								<div class="el-div-show-input-one">
+									<div class="ivu-description-detail">
+										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsRegion"
+											disabled placeholder="区域">
+										</el-input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ivu-card-body-one">
+							<div class="ivu-description-list">
+								<div class="el-div-show-input-one">
+									<div class="ivu-description-detail">
+										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsAddress"
+											disabled placeholder="地址">
+										</el-input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ivu-card-body-one" style="width:507px">
+							<div class="ivu-description-list">
+								<div class="el-div-show-input-one">
+									<div class="ivu-description-detail">
+										<el-input class="el-show-input-one-s" v-model="Outletsvalue.outletsRemarks"
+											disabled placeholder="备注">
+										</el-input>
+									</div>
+								</div>
+							</div>
+						</div>
 						<el-form-item class="el-show-right-menus-input-two">
-							<el-button class="el-show-btn-two-log-s" type="primary" @click="">立即创建</el-button>
-							<el-button class="el-show-btn-two-log-s">取消</el-button>
+							<el-button class="el-show-btn-two-log-s" type="primary" style="display:none;">
+								<i class="el-icon-document"></i>
+								保存
+							</el-button>
 						</el-form-item>
 					</el-form>
 				</div>
@@ -91,12 +190,33 @@
 			return {
 				input: "",
 				OutletsData: [],
+				Outlets: [],
+				Outletsvalue: {
+					outletsId: "",
+					outletsNumber: "",
+					outletsName: "",
+					outletsBelonging: "",
+					outletsPerson: "",
+					outletsPhone: "",
+					outletsProvince: "",
+					outletsCity: "",
+					outletsRegion: "",
+					outletsAddress: "",
+					outletsRemarks: "",
+					addname: "",
+					addtime: "",
+					updatename: "",
+					updatetime: "",
+					deletename: "",
+					deletetime: "",
+					timeliness: ""
+				},
 				xz: [],
 				form: {
 					name: '',
 					paths: ''
 				},
-				abdf:"",
+				abdf: "",
 				visible: false,
 				filterText: '',
 				defaultProps: {
@@ -115,6 +235,9 @@
 				if (!value) return true;
 				return data.label.indexOf(value) !== -1;
 			},
+			addwd(){
+				
+			},
 			selectAllRoleByEmpId() {
 				this.xz = [];
 				const _this = this;
@@ -122,7 +245,7 @@
 						params: this.OutletsData
 					})
 					.then(function(response) {
-						_this.OutletsData = response.data
+						_this.OutletsData = response.data.data
 						_this.OutletsData.forEach((item) => {
 							_this.xz.push(item.outletsId)
 						})
@@ -133,10 +256,29 @@
 						console.log(error)
 					})
 			},
-			showwd(id){
-				console.log(id)
-				console.log("22222222")
-				console.log("abdf")
+			getCheckedKeys() {
+				console.log(Number(this.$refs.tree.getCheckedKeys()));
+				const _this = this;
+				var id = Number(this.$refs.tree.getCheckedKeys())
+				this.axios.get("http://localhost:8089/Logistics/selectOutletsById/" + id, {
+						params: id
+					})
+					.then(function(response) {
+						console.log(response)
+						_this.Outlets = response.data.data
+						_this.Outletsvalue.outletsName = _this.Outlets.outletsName
+						_this.Outletsvalue.outletsNumber = _this.Outlets.outletsNumber
+						_this.Outletsvalue.outletsPhone = _this.Outlets.outletsPhone
+						_this.Outletsvalue.outletsPerson = _this.Outlets.outletsPerson
+						_this.Outletsvalue.outletsProvince = _this.Outlets.outletsProvince
+						_this.Outletsvalue.outletsCity = _this.Outlets.outletsCity
+						_this.Outletsvalue.outletsRegion = _this.Outlets.outletsRegion
+						_this.Outletsvalue.outletsAddress = _this.Outlets.outletsAddress
+						_this.Outletsvalue.outletsRemarks = _this.Outlets.outletsRemarks
+						console.log(_this.Outlets)
+					}).catch(function(error) {
+						console.log(error)
+					})
 			}
 		},
 		created() {
@@ -151,7 +293,7 @@
 						_this.xz.push(item.outletsId)
 					})
 					_this.$nextTick(() => {
-						_this.$refs.tree.setCheckedKeys(_this.xz);
+						_this.$refs.tree.setCheckedKeys([]);
 					});
 				}).catch(function(error) {
 					console.log(error)
@@ -263,6 +405,13 @@
 		position: relative;
 	}
 
+	.ivu-card-body-one {
+		display: inline-block;
+		padding-left: 13px;
+		padding-right: 16px;
+		width: 150px;
+	}
+
 	.el-show-right-menus-one {
 		border-bottom: 1px solid #e8eaec;
 		padding: 14px 16px;
@@ -309,5 +458,31 @@
 	.el-show-btn-two-log-s {
 		padding: 8px 18px;
 		min-height: 30px;
+	}
+
+	.el-input__inner {
+		-webkit-appearance: none;
+		background-color: #FFF;
+		border-radius: 4px;
+		border: 1px solid #DCDFE6;
+		box-sizing: border-box;
+		display: inline-block;
+		height: 32px;
+		line-height: 40px;
+		outline: 0;
+		padding: 0 15px;
+		-webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+		transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+		width: 100%;
+	}
+
+	.el-form-item__content {
+		-webkit-box-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+		line-height: 40px;
+		position: relative;
+		font-size: 14px;
+		margin-left: 230px;
 	}
 </style>
